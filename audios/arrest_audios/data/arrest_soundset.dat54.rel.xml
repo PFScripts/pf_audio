@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<Dat54>
+  <Version value="7314721"/>
+  <ContainerPaths>
+    <Item>audiodirectory\arrest_audiobank</Item>
+  </ContainerPaths>
+  <Items>
+    <Item type="SimpleSound">
+      <Name>being_cuffed_sp</Name>
+      <Header>
+        <Flags value="0x00008004"/>
+        <Volume value="200"/>
+        <Category>scripted</Category>
+      </Header>
+      <ContainerName>audiodirectory/arrest_audiobank</ContainerName>
+      <FileName>being_cuffed</FileName>
+      <WaveSlotNum value="0"/>
+    </Item>
+    <Item type="SimpleSound">
+      <Name>being_uncuffed_sp</Name>
+      <Header>
+        <Flags value="0x00008004"/>
+        <Volume value="200"/>
+        <Category>scripted</Category>
+      </Header>
+      <ContainerName>audiodirectory/arrest_audiobank</ContainerName>
+      <FileName>being_uncuffed</FileName>
+      <WaveSlotNum value="0"/>
+    </Item>
+    <Item type="SimpleSound">
+      <Name>being_untied_sp</Name>
+      <Header>
+        <Flags value="0x00008004"/>
+        <Volume value="200"/>
+        <Category>scripted</Category>
+      </Header>
+      <ContainerName>audiodirectory/arrest_audiobank</ContainerName>
+      <FileName>being_untied</FileName>
+      <WaveSlotNum value="0"/>
+    </Item>
+    <Item type="SimpleSound">
+      <Name>being_ziptied_sp</Name>
+      <Header>
+        <Flags value="0x00008004"/>
+        <Volume value="200"/>
+        <Category>scripted</Category>
+      </Header>
+      <ContainerName>audiodirectory/arrest_audiobank</ContainerName>
+      <FileName>being_ziptied</FileName>
+      <WaveSlotNum value="0"/>
+    </Item>
+    <Item type="SoundSet">
+      <Name>arrest_soundset</Name>
+      <Header>
+        <Flags value="0xAAAAAAAA"/>
+      </Header>
+      <SoundSets>
+        <Item>
+          <ScriptName>being_cuffed</ScriptName>
+          <ChildSound>being_cuffed_sp</ChildSound>
+        </Item>
+        <Item>
+          <ScriptName>being_uncuffed</ScriptName>
+          <ChildSound>being_uncuffed_sp</ChildSound>
+        </Item>
+        <Item>
+          <ScriptName>being_untied</ScriptName>
+          <ChildSound>being_untied_sp</ChildSound>
+        </Item>
+        <Item>
+          <ScriptName>being_ziptied</ScriptName>
+          <ChildSound>being_ziptied_sp</ChildSound>
+        </Item>
+      </SoundSets>
+    </Item>
+  </Items>
+</Dat54>
