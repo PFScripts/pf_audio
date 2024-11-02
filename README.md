@@ -17,7 +17,7 @@
 ## `Information`
 
 * **FiveM:** Works out of the box.
-* **RedM:** WIP (I have no time to test this on RedM atm, but I'm aware that the natives are quite similar but there are more of them, I never checked them out, anyways it should not be too painful to adapt it to RedM).
+* **RedM:** Should work out of the box but since I can't test it out, if someone find any errors just open a ticket on our discord.
 * **Stop/Pause:** Stop or Pause an audio thats already playing its not supported.
 * **Loop:** Looping an audio is not supported.
 

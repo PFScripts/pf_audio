@@ -1,3 +1,5 @@
+local IsRunningRedM<const> = GetGameName() == 'redm' and true or false
+
 -- [Functions] --
 
 local function requestAudio(audioBank)
@@ -21,7 +23,11 @@ local function playAudio(audio)
   if not audio.bank or not audio.name or not audio.soundset then return end
   local audioId = requestAudio(audio.bank)
   if not audioId then return end
-  PlaySoundFrontend(audioId, audio.name, audio.soundset, false)
+  if IsRunningRedM then
+    PlaySoundFrontendWithSoundId(audioId, audio.name, audio.soundset, false)
+  else
+    PlaySoundFrontend(audioId, audio.name, audio.soundset, false)
+  end
   releaseAudio(audioId, audio.bank)
 end
 
@@ -30,7 +36,11 @@ local function playAudioFromCoords(audio)
   if not audio.bank or not audio.name or not audio.soundset or not audio.coords or not audio.range then return end
   local audioId = requestAudio(audio.bank)
   if not audioId then return end
-  PlaySoundFromCoord(audioId, audio.name, audio.coords.x, audio.coords.y, audio.coords.z, audio.soundset, false, audio.range, false)
+  if IsRunningRedM then
+    PlaySoundFromPositionWithId(audioId, audio.name, audio.coords.x, audio.coords.y, audio.coords.z, audio.soundset, false, audio.range, false)
+  else
+    PlaySoundFromCoord(audioId, audio.name, audio.coords.x, audio.coords.y, audio.coords.z, audio.soundset, false, audio.range, false)
+  end
   releaseAudio(audioId, audio.bank)
 end
 
@@ -40,7 +50,11 @@ local function playAudioFromEntity(audio)
   if not DoesEntityExist(audio.entity) then return end
   local audioId = requestAudio(audio.bank)
   if not audioId then return end
-  PlaySoundFromEntity(audioId, audio.name, audio.entity, audio.soundset, false, false)
+  if IsRunningRedM then
+    PlaySoundFromEntityWithSet(audioId, audio.name, audio.entity, audio.soundset, false, false)
+  else
+    PlaySoundFromEntity(audioId, audio.name, audio.entity, audio.soundset, false, false)
+  end
   releaseAudio(audioId, audio.bank)
 end
 
