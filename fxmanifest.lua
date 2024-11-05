@@ -10,7 +10,6 @@ version '1.0.0'
 
 client_scripts {'client/*.lua'}
 server_scripts {'server/*.lua'}
-
 files {'**.awc', '**.dat54.rel'}
 
 -- [Arrest Audios] --
