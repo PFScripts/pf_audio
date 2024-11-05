@@ -10,6 +10,9 @@ local ReleaseNamedScriptAudioBank = ReleaseNamedScriptAudioBank
 local PlaySoundFrontend = PlaySoundFrontend
 local PlaySoundFromCoord = PlaySoundFromCoord
 local PlaySoundFromEntity = PlaySoundFromEntity
+local DoesEntityExist = DoesEntityExist
+local NetworkDoesNetworkIdExist = NetworkDoesNetworkIdExist
+local NetworkGetEntityFromNetworkId = NetworkGetEntityFromNetworkId
 
 -- [Functions] --
 
