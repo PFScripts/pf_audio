@@ -1,9 +1,13 @@
+-- [Variables] --
+
+local NetworkGetNetworkIdFromEntity = NetworkGetNetworkIdFromEntity
+
 -- [Functions] --
 
----@param src number
+---@param playerId number
 ---@param audio PlayAudio
-local function playAudio(src, audio)
-  TriggerClientEvent('pf_audio:client:playAudio', src, audio)
+local function playAudio(playerId, audio)
+  TriggerClientEvent('pf_audio:client:playAudio', playerId, audio)
 end
 
 ---@param audio PlayAudioFromCoords

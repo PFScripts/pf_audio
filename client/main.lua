@@ -1,18 +1,32 @@
-local IsRunningRedM<const> = GetGameName() == 'redm' and true or false
+-- [Variables] --
+
+local GetGameName = GetGameName
+local IS_GAME_REDM <const> = GetGameName() == 'redm' and true or false
+local string_format = string.format
+local RequestScriptAudioBank = RequestScriptAudioBank
+local GetSoundId = GetSoundId
+local ReleaseSoundId = ReleaseSoundId
+local ReleaseNamedScriptAudioBank = ReleaseNamedScriptAudioBank
+local PlaySoundFrontend = PlaySoundFrontend
+local PlaySoundFromCoord = PlaySoundFromCoord
+local PlaySoundFromEntity = PlaySoundFromEntity
 
 -- [Functions] --
 
+---@param audioBank string
+---@return number
 local function requestAudio(audioBank)
-  local timeout = 1000
-  local scriptAudioBank = string.format('audiodirectory/%s', audioBank)
-  while not RequestScriptAudioBank(scriptAudioBank, false) do
-    if timeout == 0 then return false end
-    timeout -= 1
+  local audioBankTimeout, audioBankPath = 1000, string_format('audiodirectory/%s', audioBank)
+  while not RequestScriptAudioBank(audioBankPath, false) do
+    if audioBankTimeout == 0 then error(string_format('Timmed out while trying to request %s', audioBankPath), 2) end
+    audioBankTimeout -= 1
     Wait(0)
   end
   return GetSoundId()
 end
 
+---@param audioId number
+---@param audioBank string
 local function releaseAudio(audioId, audioBank)
   ReleaseSoundId(audioId)
   ReleaseNamedScriptAudioBank(audioBank)
@@ -23,7 +37,7 @@ local function playAudio(audio)
   if not audio.bank or not audio.name or not audio.soundset then return end
   local audioId = requestAudio(audio.bank)
   if not audioId then return end
-  if IsRunningRedM then
+  if IS_GAME_REDM then
     PlaySoundFrontendWithSoundId(audioId, audio.name, audio.soundset, false)
   else
     PlaySoundFrontend(audioId, audio.name, audio.soundset, false)
@@ -36,10 +50,12 @@ local function playAudioFromCoords(audio)
   if not audio.bank or not audio.name or not audio.soundset or not audio.coords or not audio.range then return end
   local audioId = requestAudio(audio.bank)
   if not audioId then return end
-  if IsRunningRedM then
-    PlaySoundFromPositionWithId(audioId, audio.name, audio.coords.x, audio.coords.y, audio.coords.z, audio.soundset, false, audio.range, false)
+  if IS_GAME_REDM then
+    PlaySoundFromPositionWithId(audioId, audio.name, audio.coords.x, audio.coords.y, audio.coords.z, audio.soundset,
+      false, audio.range, false)
   else
-    PlaySoundFromCoord(audioId, audio.name, audio.coords.x, audio.coords.y, audio.coords.z, audio.soundset, false, audio.range, false)
+    PlaySoundFromCoord(audioId, audio.name, audio.coords.x, audio.coords.y, audio.coords.z, audio.soundset, false,
+      audio.range, false)
   end
   releaseAudio(audioId, audio.bank)
 end
@@ -50,21 +66,13 @@ local function playAudioFromEntity(audio)
   if not DoesEntityExist(audio.entity) then return end
   local audioId = requestAudio(audio.bank)
   if not audioId then return end
-  if IsRunningRedM then
+  if IS_GAME_REDM then
     PlaySoundFromEntityWithSet(audioId, audio.name, audio.entity, audio.soundset, false, false)
   else
     PlaySoundFromEntity(audioId, audio.name, audio.entity, audio.soundset, false, false)
   end
   releaseAudio(audioId, audio.bank)
 end
-
--- [Exports] --
-
-exports('PlayAudio', playAudio)
-
-exports('PlayAudioFromCoords', playAudioFromCoords)
-
-exports('PlayAudioFromEntity', playAudioFromEntity)
 
 -- [Events] --
 
@@ -78,3 +86,11 @@ RegisterNetEvent('pf_audio:client:playAudioFromEntity', function(audio)
   audio.entity = NetworkGetEntityFromNetworkId(audio.entity)
   playAudioFromEntity(audio)
 end)
+
+-- [Exports] --
+
+exports('PlayAudio', playAudio)
+
+exports('PlayAudioFromCoords', playAudioFromCoords)
+
+exports('PlayAudioFromEntity', playAudioFromEntity)
