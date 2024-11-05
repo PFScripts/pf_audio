@@ -1,27 +1,15 @@
 -- [Variables] --
 
-local GetGameName = GetGameName
 local IS_GAME_REDM <const> = GetGameName() == 'redm' and true or false
-local string_format = string.format
-local RequestScriptAudioBank = RequestScriptAudioBank
-local GetSoundId = GetSoundId
-local ReleaseSoundId = ReleaseSoundId
-local ReleaseNamedScriptAudioBank = ReleaseNamedScriptAudioBank
-local PlaySoundFrontend = PlaySoundFrontend
-local PlaySoundFromCoord = PlaySoundFromCoord
-local PlaySoundFromEntity = PlaySoundFromEntity
-local DoesEntityExist = DoesEntityExist
-local NetworkDoesNetworkIdExist = NetworkDoesNetworkIdExist
-local NetworkGetEntityFromNetworkId = NetworkGetEntityFromNetworkId
 
 -- [Functions] --
 
 ---@param audioBank string
 ---@return number
 local function requestAudio(audioBank)
-  local audioBankTimeout, audioBankPath = 1000, string_format('audiodirectory/%s', audioBank)
+  local audioBankTimeout, audioBankPath = 1000, ('audiodirectory/%s'):format(audioBank)
   while not RequestScriptAudioBank(audioBankPath, false) do
-    if audioBankTimeout == 0 then error(string_format('Timmed out while trying to request %s', audioBankPath), 2) end
+    if audioBankTimeout == 0 then error(('Timmed out while trying to request %s'):format(audioBankPath), 2) end
     audioBankTimeout -= 1
     Wait(0)
   end

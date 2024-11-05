@@ -1,7 +1,3 @@
--- [Variables] --
-
-local NetworkGetNetworkIdFromEntity = NetworkGetNetworkIdFromEntity
-
 -- [Functions] --
 
 ---@param playerId number
